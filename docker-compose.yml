@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.1-alpine
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  nextjs-todo-prismadb:
+    stdin_open: true
+    image: nextjs-prismadb
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextjs-prismadb-ps
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    restart: always
+
+volumes:
+  postgres:
+    name: nextjs-project
