@@ -16,7 +16,6 @@ pnpm dev
 
 `
 npx prisma init
-
 `
 - Open the .env, we will see it has a DATABASE_URL:
 
